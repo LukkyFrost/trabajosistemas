@@ -1,7 +1,5 @@
 package LukkyFrost.cosa;
-
 import java.util.ArrayList;
-import Services.traduccion;
 import models.Paismodelo;
 import repositories.CosaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jdk.vm.ci.services.Services;
+
 
 @SpringBootApplication
 @RestController
