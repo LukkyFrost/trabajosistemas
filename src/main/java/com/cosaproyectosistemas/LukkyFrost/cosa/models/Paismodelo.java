@@ -1,4 +1,4 @@
-package models;
+package com.cosaproyectosistemas.LukkyFrost.cosa.models;
 
 import java.util.Date;
 
@@ -17,6 +17,8 @@ public class Paismodelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
+    private Long id;
+
     private String Pais;
     private String Capital;
     @Temporal(TemporalType.TIMESTAMP)
