@@ -1,4 +1,4 @@
-package com.cebem.transformalotu.models;
+package models;
 
 import java.util.Date;
 
@@ -31,7 +31,7 @@ public class Paismodelo {
         this.Pais = Pais;
     }
 
-    public Integer getCapital() {
+    public String getCapital() {
         return Capital;
     }
 

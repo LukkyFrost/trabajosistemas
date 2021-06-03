@@ -1,14 +1,26 @@
 package LukkyFrost.cosa;
 
-import org.springframework.boot.SpringApplication;
+import java.util.ArrayList;
+import Services.traduccion;
+import models.Paismodelo;
+import repositories.CosaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import jdk.vm.ci.services.Services;
 
 @SpringBootApplication
 @RestController
 public class CosaApplication {
+	ArrayList<String> datos;
+	@Autowired
+    private CosaRepository cosarepository;
 	@RequestMapping("/contar/{palabra}")
 	public String contar() {
-		String palabra;
+		String palabra = "";
 		char[] letras = palabra.toCharArray();
 		int [] resultvocalconso = {0,0};
 		for (int i = 0; i< palabra.length(); i++){
@@ -20,40 +32,33 @@ public class CosaApplication {
 		return "la palabra tiene: "+ resultvocalconso[0]+" vocales y "+resultvocalconso[1]+" consonantes";
 	}
 	@RequestMapping("/listar")
-		public ArrayList<datostabla> listar() {
-			return (ArrayList<datostabla>) cosarepository.findAll();
+		public ArrayList<Paismodelo> listar() {
+			return (ArrayList<Paismodelo>) 	cosarepository.findAll();
 	}
-	@RequestMapping("/contar/{Pais}")
-	public Paismodelo guardarpais(Paismodelo Pais) {
-        return cosarepository.save(Pais);
+	@RequestMapping("/guarda")
+	public void datos(@RequestParam String cosa) {
+		cosa.split("&");
+		for(int i=0; i<cosa.length(); i++ ){
+			String [] informacion = cosa.split("=");
+			Paismodelo paismodelo = new Paismodelo();
+		paismodelo.setPais(informacion[0]);
+		paismodelo.setCapital(informacion[1]);
+        cosarepository.save(paismodelo);
+		}
+		
     }
 	@RequestMapping("/{texto}")
 	public String transformconsonantintos(String texto) {
 		char [] equalslowercase = {'b','c','d','f','g','h','j','q','l','m','n','ñ','p','q','r','t','v','w','x','y','z'};
 		char [] equalscapital = {'B','C','D','F','G','H','J','Q','L','M','N','Ñ','P','Q','R','T','V','W','X','Y','Z'};
-
 	for (int i = 0; i < 21; i++) {
 		texto=texto.replace(equalslowercase[i], 'S');
 		texto=texto.replace(equalscapital[i], 's');
 		}
 		return texto;
 	}
-	@RequestMapping("/traduce/{cosa}}")
-	public String traducir(String cosa){
-    @Autowired
-    RestTemplate restTemplate;	 
-		return gettraduccion(cosa);
+	@RequestMapping("/traduce/{texto}")
+	public void espaingles(String texto) {
+	System.out.println(Services.traduccion.gettraduccion(texto));
 	}
-    public String gettraduccion(String cosa) {
-        
-		String [] cosacortada = cosa.trim();
-		for(int i = 0; i< cosacortada.length; i++){
-		String url = "https://api.mymemory.translated.net/get?q={"+cosacortada[i]+"}&langpair=es|en";
-        traduccion json = restTemplate.getForObject(url);
-	}
-        System.out.println(json.age);
-        return json.traduccion;
-    }
 }
-
-
