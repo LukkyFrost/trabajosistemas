@@ -40,17 +40,13 @@ public class CosaApplication {
 			return (ArrayList<Paismodelo>) 	cosarepository.findAll();
 	}
 	@GetMapping("/guarda")
-	public void datos(@RequestParam String cosa) {
-		cosa.split("&");
-		for(int i=0; i<cosa.length(); i++ ){
-			String [] informacion = cosa.split("=");
-			Paismodelo paismodelo = new Paismodelo();
-		paismodelo.setPais(informacion[0]);
-		paismodelo.setCapital(informacion[1]);
+	public void datos(@RequestParam String Pais,@RequestParam String Capital) {
+		Paismodelo paismodelo = new Paismodelo();
+		paismodelo.setpais(Pais);
+		paismodelo.setcapital(Capital);
         cosarepository.save(paismodelo);
 		}
-		
-    }
+	
 	@GetMapping("/{texto}")
 	public String transformconsonantintos(@PathVariable String texto) {
 		char [] equalslowercase = {'b','c','d','f','g','h','j','q','l','m','n','ñ','p','q','r','t','v','w','x','y','z'};

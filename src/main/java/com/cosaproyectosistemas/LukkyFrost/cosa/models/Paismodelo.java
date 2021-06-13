@@ -1,57 +1,47 @@
 package com.cosaproyectosistemas.LukkyFrost.cosa.models;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Pais")
+@Table(name = "Paca")
 public class Paismodelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
 
-    private String Pais;
-    private String Capital;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date fecha; 
+    @Column(unique = false, nullable = false)
+    private String pais;
+
+
+    @Column(unique = false, nullable = false)
+    private String capital;
 
     public String getPais() {
-        return Pais;
+        return pais;
     }
 
-    public void setPais(String Pais) {
-        this.Pais = Pais;
+    public void setpais(String pais) {
+        this.pais = pais;
     }
 
-    public String getCapital() {
-        return Capital;
+    public String getcapital() {
+        return capital;
     }
 
-    public void setCapital(String Capital) {
-        this.Capital = Capital;
+    public void setcapital(String capital) {
+        this.capital = capital;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 
     @Override
     public String toString() {
-        return "Paismodelo [Pais=" + Pais + ", Capital=" + Capital + "]";
+        return "Paismodelo [Pais=" + pais + ", Capital=" + capital + "]";
     }
 
 }
